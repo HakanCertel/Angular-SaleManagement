@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a routerLink="/" class="navbar-brand">Order Management</a>
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse"id="navbarCollapse" >            
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+                <li class="nav-item"><a routerLink="/" class="nav-link">Home</a></li>
+               
+            </ul>
+            <ul class="navbat-nav ms-auto mb-2 mb-lg-0">
+                <li *ngIf="true" class="nav-item ">
+                    <a routerLink="/auth" class="nav-link">Login</a>
+                </li>
+                <li *ngIf="false" class="nav-item">
+                    <a routerLink="/auth" class="nav-link">Register</a>
+                </li>
+                <li *ngIf="false" class="nav-item">
+                    <a routerLink="/auth" class="nav-link">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,54 @@
+<!--<div class="sidenav" [ngClass]="collapsed?'sidenav-collapsed':''">
+    <div class="logo-container">
+        <button class="logo" (click)="toggleCollapse()">A</button>
+        <div class="logo-text" *ngIf="collapsed">Angular</div>
+        <button class="btn-close" *ngIf="collapsed" (click)="closeSidenav()">
+            <i class="fas fa-list"></i>
+        </button>
+    </div>
+    <ul class="sidenav-nav">
+        <li class="sidenav-nav-item" *ngFor="let item of navData">
+            <a class="sidenav-nav-link" [routerLink]="[item.routeLink]" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact:true}">
+                <i class="sidenav-link-icon" [class]="item.icon"></i>
+                <span class="sidenav-link-text" >{{item.label}}</span>
+            </a>
+        </li>
+    </ul>
+</div>-->
+<div class="sidenav" [ngClass]="collapsed?'sidenav-collapsed':''">
+    <div class="logo-container">
+        <button class="logo" (click)="toggleCollapse()">
+            <i class="fas fa-list"></i>
+        </button>
+        <div class="logo-text" *ngIf="collapsed"></div>
+        <button class="btn-close" *ngIf="collapsed" (click)="closeSidenav()">
+           
+        </button>
+    </div>
+    <ul class="sidenav-nav">
+        <li class="sidenav-nav-item" *ngFor="let item of navData">
+            <a class="sidenav-nav-link"  [routerLink]="[item.routeLink]" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact:true}"
+            data-bs-toggle="collapse" 
+            [attr.data-bs-target]="'#collapseExample'+item.id" aria-expanded="false" [attr.aria-control]="'collapseExample'+item.id" (click)="openSidenav()"
+           >
+                <i class="sidenav-link-icon" [class]="item.icon"></i>
+                <span class="sidenav-link-text" [textContent]="collapsed?[item.label]:''" ></span>
+            </a>
+            <ul id="{{'collapseExample'+item.id}}" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidenavbar" *ngIf="getSubNavbarData.length>0">
+                <div *ngFor="let subItem of getSubNavbarData(item.id)">
+
+                    <li class="sidenav-nav-item">
+                        <a [routerLink]="[subItem.routeLink]" *ngIf="collapsed" class="sidenav-link">
+                            <i class="sidenav-link-icon" [class]="subItem.icon"></i>
+                            <span class="sidenav-link-text" >{{subItem.label}}</span>
+                        </a>
+                    </li>
+                </div>
+            
+            </ul>
+        </li>
+    </ul>
+</div>
+<ng-template #dropdown></ng-template>

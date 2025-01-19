@@ -1,0 +1,33 @@
+<div class="container" >
+    <table class="table table-striped nowrap table-hover">
+        <thead>
+            <tr style="font-size:medium;"  class="table-info">
+                <th hidden>#</th>
+                <th>Material Code</th>
+                <th>Material Name</th>
+                <th>Price</th>
+                <th>Order Quantity</th>
+                <th>Total Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="font-size: small;" *ngFor="let item of changeData.orderDetails">
+                <th hidden>{{ item.materialId }}</th>
+                <td>{{ item.materiaCode }}</td>
+                <td>{{ item.materialName }}</td>
+                <td>{{ item.materialPrice}}</td>
+                <td>
+                    <input type="number"[(ngModel)]="item.quantity" #quantity="ngModel" name="quantity" >
+                </td>
+                <td>{{item.quantity*item.materialPrice}}</td>
+                <td>
+                    <button  type="button" (click)="deleteOrderDetails(item)" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </td>
+            </tr>
+           
+        </tbody>
+    </table>
+</div>

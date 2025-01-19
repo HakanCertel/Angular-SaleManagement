@@ -1,0 +1,89 @@
+/* You can add global styles to this file, and also import other style files */
+/*@import "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css";
+@import "https://cdn.datatables.net/2.2.1/css/dataTables.bootstrap5.css";
+@import "https://cdn.datatables.net/responsive/3.0.3/css/responsive.bootstrap5.css";*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+.form-control.ng-touched.ng-invalid{
+    border-left:5px solid #a94442
+}
+.form-control.ng-dirty.ng-valid{
+    border-left:5px solid #41A948
+}
+.form-select.ng-touched.ng-invalid{
+    border-left:5px solid #a94442
+}
+.form-select.ng-dirty.ng-valid{
+    border-left:5px solid #41A948
+}
+a{
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+}
+li{
+    list-style: none;
+}
+.wrapper{
+    align-items: stretch;
+    display: flex;
+    width: 100%;
+}
+
+#sidebar{
+    max-width: 264px;
+    min-width: 264px;
+    transition: all 0.35s ease-in-out;
+}
+#sidebar.collapsed{
+    margin-left: -264px;
+}
+
+.main{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    transition: all 0.35s ease-in-out;
+}
+
+.sidebar-logo{
+    padding: 1.15rem 1.5rem;
+}
+.sidebar-logo a{
+    color: #051524;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+.sidebar-nav{
+    padding: 0;
+}
+.sidebar-header{
+    color: #051524;
+    font-size: .75rem;
+    padding: 1.5rem 3rem .375rem;
+}
+a.sidebar-link{
+    padding: .625rem 1.625rem;
+    color: #051524;
+    position: relative;
+    display: block;
+    font-size: 1rem;
+}
+.sidebar-link[data-bs-toggle="collapse"] ::after{
+    border: solid;
+    border-width: 0 .075rem .075rem 0;
+    content: "";
+    display: inline-block;
+    padding: 2px;
+    position: absolute;
+    right: 1.5rem;
+    top: 1.4rem;
+    transform: rotate(-135deg);
+    transition: all .2s ease-out;
+}
+.sidebar-link[data-bs-toggle="collapse"].collapsed::after{
+    transform: rotate(45deg);
+    transition: all .2s ease-out;
+}

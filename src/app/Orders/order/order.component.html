@@ -1,0 +1,45 @@
+<h3 *ngIf="!changeData.isShowedMaterialList" class="text-center mt-3 mb-3">Order Create</h3>
+<div class="container" *ngIf="!changeData.isShowedMaterialList">
+    <div *ngIf="!changeData.isShowedMaterialList">
+        <button (click)="showMaterialList()" type="button" class="btn btn-primary mb-3">
+            <i class="fas fa-plus"></i>
+            New Item
+        </button>
+    </div>
+    <form #form="ngForm" (ngSubmit)="saveOrder(form)" class="row g-3">
+        <div class="alert alert-danger" *ngIf="error">
+            {{error}}
+        </div>
+        
+        <div hidden >
+            <input type="text"  [(ngModel)]="model.id" #id="ngModel" name="id">
+        </div>
+        
+        <div class=" col-md-3">
+            <label for="code" class="form-lable"> Order No</label>
+            <input required minlength="5" [(ngModel)]="model.code" #code="ngModel" type="text" name="code" id="code" class="form-control">
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="customerId" class="form-lable">Customer</label>
+            <select [(ngModel)]="model.customerId" name="customerId" id="customerId" class="form-select">
+                <option value="0">Customer</option>
+                <option *ngFor="let customer of customers" value="{{customer.id}}">{{customer.name}}</option>
+            </select>
+        </div>
+        <div class="form-check mb-3 col-md-3">
+            <input [(ngModel)]="model.isActive" class="form-check-input" type="checkbox" name="isActive" id="isActive">
+            <label class="form-check-label" for="flexCheckDefault">
+                Is Active
+            </label>
+        </div>
+        
+        <order-details [changeData]="changeData" [order]="order"></order-details>
+        
+        <button [hidden]="update" type="submit" class="btn btn-primary" [disabled]="form.
+        invalid">Save Order</button>
+        
+        <button [hidden]="!update" type="submit" class="btn btn-warning" [disabled]="form.
+        invalid">Update Order</button>
+    </form>
+</div>
+<material-list [changeData]="changeData" (selectEvent)="selectData($event)" *ngIf="changeData.isShowedMaterialList"></material-list>

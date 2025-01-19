@@ -1,0 +1,37 @@
+<h3 class="text-center mt-3 mb-3">Customer Create</h3>
+<div class="container">
+
+    <form #form="ngForm" (ngSubmit)="saveCustomer(form)" class="row g-3">
+        <div class="alert alert-danger" *ngIf="error">
+            {{error}}
+        </div>
+        <input hidden [(ngModel)]="model.id" #id="ngModel" type="text" name="id" id="id" class="form-control">
+        <div class=" col-md-3">
+            <label for="code" class="form-lable">Customer Code</label>
+            <input required minlength="5" [(ngModel)]="model.code" #code="ngModel" type="text" name="code" id="code" class="form-control">
+        </div>
+        <div class=" col-md-9">
+            <label for="name" class="form-lable">Customer Name</label>
+            <input required minlength="5" [(ngModel)]="model.name" #name="ngModel" type="text" name="name" id="name" class="form-control">
+        </div>   
+        <div class="mb-3 col-md-12">
+            <label for="adress" class="form-lable">Adress</label>
+            <textarea required minlength="5"  [(ngModel)]="model.adress" #adress="ngModel" name="adress"  id="adress" class="form-control"></textarea>
+        </div>      
+        <div class="mb-3 col-md-12">
+            <label for="description" class="form-lable">Description</label>
+            <textarea [(ngModel)]="model.description" name="description"  id="description" class="form-control"></textarea>
+        </div>
+        <div class="form-check mb-3 col-md-12">
+            <input [(ngModel)]="model.isActive" class="form-check-input" type="checkbox" name="isActive" id="isActive">
+            <label class="form-check-label" for="flexCheckDefault">
+                Is Active
+            </label>
+        </div>
+        <button [hidden]="update" type="submit" class="btn btn-primary" [disabled]="form.
+        invalid">Save Customer</button>
+        <button [hidden]="!update" type="submit" class="btn btn-primary" [disabled]="form.
+        invalid">Update Customer</button>
+    </form>
+</div>
+

@@ -1,0 +1,46 @@
+<h3 class="text-center" style="margin-top: 50px;">Material List</h3>
+
+<div class="container" >
+    <a routerLink="/materialcreate" style="margin-bottom: 10px;"class="btn btn-primary">
+        <i class="fas fa-plus"></i>
+        New Item
+    </a>
+    <table id="example" class="table table-striped nowrap table-hover" style="width:100%">
+        <thead>
+            <tr style="font-size:medium;"  class="table-info">
+                <th hidden>#</th>
+                <th>Category</th>
+                <th>Material Code</th>
+                <th>Material Name</th>
+                <th>Price</th>
+                <th>Is Active</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="font-size: small;" *ngFor="let item of materials">
+                <td hidden>{{ item.id }}</td>
+                <td>{{item.categoryName}}</td>
+                <td>{{ item.code }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.price}}</td>
+                <td>{{item.isActive}}</td>
+                <td>
+                    <a *ngIf="!changeData.isShowedMaterialList" routerLink="/materialcreate/{{item.id}}" class="btn btn-warning">
+                        <i class="fas fa-pen"></i>
+                    </a>
+                    <button *ngIf="!changeData.isShowedMaterialList" type="button" class="btn btn-danger"> 
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                    <button type="button" *ngIf="changeData.isShowedMaterialList"  class="btn btn-primary" (click)="selectMaterial(item)">
+                        Choise
+                        <i class="fas fa-check-circle"></i>
+                    </button>
+                </td>
+            </tr>
+            <div class="spinner-border text-primary" role="status" *ngIf="loading">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </tbody>
+    </table>
+</div>

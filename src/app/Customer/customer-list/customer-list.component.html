@@ -1,0 +1,42 @@
+<h3 class="text-center" style="margin-top: 50px;">Customer List</h3>
+
+<div class="container" >
+    <a routerLink="/customer" style="margin-bottom: 10px;"class="btn btn-primary">
+        <i class="fas fa-plus"></i>
+        New Item
+    </a>
+    <table id="example" class="table table-striped nowrap table-hover" style="width:100%">
+        <thead>
+            <tr style="font-size:medium;"  class="table-info">
+                <th hidden>#</th>
+                <th>Customer Code</th>
+                <th>Customer Name</th>
+                <th>Adress</th>
+                <th>Description</th>
+                <th>Is Active</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="font-size: small;" *ngFor="let item of customers">
+                <th hidden>{{ item.id }}</th>
+                <td>{{ item.code }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.adress}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.isActive}}</td>
+                <td>
+                    <a routerLink="/customer/{{item.id}}" class="btn btn-warning"> 
+                        <i class="fas fa-pen"></i>
+                    </a>
+                    <button type="button" (click)="deleteCustomer(item.id)" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </td>
+            </tr>
+            <div class="spinner-border text-primary" role="status" *ngIf="loading">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </tbody>
+    </table>
+</div>
