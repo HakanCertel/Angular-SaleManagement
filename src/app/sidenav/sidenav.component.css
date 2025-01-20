@@ -91,6 +91,24 @@
             }
         }
     }
+    .sidenav-nav-subItem{
+        margin-left: 2rem;
+        margin-top: .5rem;
+        .sidenav-link-subText{
+            margin-left: .5rem;
+        }
+        .sidenav-nav-subLink{
+            margin-left: .5rem;
+            color: azure;
+        }
+    }
+}
+.sidenav-nav-subItem:hover{
+    .sidenav-nav-subLink{
+        background-color: #fff;
+        color: #000
+       
+    }
 }
 .sidenav-nav-item:hover{
     .sidenav-nav-link{

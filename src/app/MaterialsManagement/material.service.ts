@@ -22,41 +22,46 @@ export class MaterialService {
   createMaterial(material:Material):Observable<Material>{
     return this.http.post<Material>(this.url+"material.json",material);
   }
-
+  updateMaterial(id:string,material:Material):Observable<Material>{
+      return this.http.put<Material>(this.url+"material/"+id+".json",material)
+  }
+  deleteMaterial(id:string){
+    this.http.delete(this.url+"material/"+id+".json").subscribe(()=>console.log("delete"));
+  }
   getMaterialById(id:string):Observable<MaterialDTO>{
-    return this.http.get<MaterialDTO>(this.url+"material/"+id+".json")
+    return this.http.get<MaterialDTO>(this.url+"material/"+id+".json").pipe(map(material=>{
+      material.id=id;
+      return material
+    }))
   }
 
-  getProducts(id?:number):Observable<MaterialDTO[]>{
+  getProducts(ids?:string[]):Observable<MaterialDTO[]>{
     return this.http
       .get<MaterialDTO[]>(this.url+"material.json")
       .pipe(
         map(data=>{
             const meterials:MaterialDTO[]=[];
             
-                for(const key in data)  {
-                  //meterials.push({...data[key],id:key});
+              for(const key in data)  {
+                if(!ids?.includes(key)){
                   this.categoryService.getCategoryById(data[key].categoryId).subscribe(cat=>{
-                  this.matDto={
-                    id:key,
-                    code:data[key].code,
-                    name:data[key].name,
-                    price:data[key].price,
-                    isActive:data[key].isActive,
-                    description:data[key].description,
-                    categoryId:data[key].categoryId,
-                    categoryName:cat.name,
-                  }
-                  meterials.push(this.matDto);
-                })
-              }
-              //this.matDtos.subscribe((data)=>console.log(data));   
-              
-              console.log(meterials);  
+                    this.matDto={
+                      id:key,
+                      code:data[key].code,
+                      name:data[key].name,
+                      price:data[key].price,
+                      isActive:data[key].isActive,
+                      description:data[key].description,
+                      categoryId:data[key].categoryId,
+                      categoryName:cat.name,
+                    }
+                    meterials.push(this.matDto);
+                  })
+                }
+               
+            }
             return meterials;
-
         })
-       
       )
-}
+  }
 }

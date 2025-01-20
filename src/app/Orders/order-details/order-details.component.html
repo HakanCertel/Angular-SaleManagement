@@ -18,7 +18,7 @@
                 <td>{{ item.materialName }}</td>
                 <td>{{ item.materialPrice}}</td>
                 <td>
-                    <input type="number"[(ngModel)]="item.quantity" #quantity="ngModel" name="quantity" >
+                    <input (change)="updateOrderDetail(item.materialId)" type="number"[(ngModel)]="item.quantity" #quantity="ngModel" name="quantity" >
                 </td>
                 <td>{{item.quantity*item.materialPrice}}</td>
                 <td>

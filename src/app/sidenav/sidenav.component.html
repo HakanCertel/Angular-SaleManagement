@@ -39,10 +39,10 @@
             <ul id="{{'collapseExample'+item.id}}" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidenavbar" *ngIf="getSubNavbarData.length>0">
                 <div *ngFor="let subItem of getSubNavbarData(item.id)">
 
-                    <li class="sidenav-nav-item">
-                        <a [routerLink]="[subItem.routeLink]" *ngIf="collapsed" class="sidenav-link">
+                    <li class="sidenav-nav-subItem">
+                        <a [routerLink]="[subItem.routeLink]" *ngIf="collapsed" class="sidenav-subLink">
                             <i class="sidenav-link-icon" [class]="subItem.icon"></i>
-                            <span class="sidenav-link-text" >{{subItem.label}}</span>
+                            <span class="sidenav-link-subText" >{{subItem.label}}</span>
                         </a>
                     </li>
                 </div>

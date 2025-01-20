@@ -31,7 +31,14 @@ export class OrderDetailsComponent implements OnInit {
   }
   deleteOrderDetails(orderDetail:OrderDetailDTO){
     const ordDet=this.changeData.orderDetails.findIndex(p=>p.materiaCode==orderDetail.materiaCode);
-    this.changeData.orderDetails.splice(ordDet,1);
+    const deletedOrd=this.changeData.orderDetails.splice(ordDet,1);
+    if(!deletedOrd[0].insert){
+      this.orderDetailsService.deleteOrderDetail(deletedOrd[0].id);
+    }
+  }
+  updateOrderDetail(id:string){
+    const index=this.changeData.orderDetails.findIndex(p=>p.materialId==id);
+    this.changeData.orderDetails[index].update=true;
   }
 
 }

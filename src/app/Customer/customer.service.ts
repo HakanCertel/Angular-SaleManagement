@@ -39,6 +39,6 @@ export class CustomerService {
     return this.http.put<Customer>(this.url+"customers/"+id+".json",customer)
   }
   deleteCustomer(id:string){
-    this.http.delete(this.url+"customers/"+id+".json");
+    this.http.delete(this.url+"customers/"+id+".json").subscribe(()=>console.log("delete"));
   }
 }

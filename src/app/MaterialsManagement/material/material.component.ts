@@ -31,6 +31,7 @@ export class MaterialComponent implements OnInit {
       this.materialService.getMaterialById(p["materialId"]).subscribe(data=>{
         if(data!=null){
           this.model=data;
+          console.log(this.model);
           this.update=true;
         }
         this.loading=false;
@@ -42,17 +43,23 @@ export class MaterialComponent implements OnInit {
   }
   saveMaterial(form:NgForm){
     const material:Material={
-      id:1,
+      id:this.model.id,
       code:this.model.code,
       name:this.model.name,
       price:this.model.price,
       isActive:this.model.isActive,
       categoryId:this.model.categoryId
     }
-    this.materialService.createMaterial(material).subscribe(data=>{
+    if(this.update){
+      this.materialService.updateMaterial(material.id,material);
       this.router.navigate(['/material-list']);
-      console.log(data);
-    });
+    }else{
+      this.materialService.createMaterial(material).subscribe(data=>{
+        this.router.navigate(['/material-list']);
+        console.log(data);
+      });
+    }
+   
   }
 
 }

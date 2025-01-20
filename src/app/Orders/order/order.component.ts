@@ -45,7 +45,6 @@ export class OrderComponent implements OnInit{
         this.orderService.getOrderById(p["orderId"]).subscribe(ord=>{
             if(ord!=null){
               this.changeData.orderDetails=[];
-              console.log("order nginit")
               this.model={...ord,id:p["orderId"]};
               this.order.orderId=ord.code;
               this.order.customerId=ord.customerId;
@@ -81,25 +80,12 @@ export class OrderComponent implements OnInit{
         console.log(data);
         console.log("yeni kayıt eklendi")
       })
-    } else{
+    } else {
       this.orderService.updateOrder(order.id,order).subscribe(data=>{
-        console.log("data update");
         this.router.navigate(["/order-list"]);
-        console.log(data);
       })
     }  
-    for(const a of this.changeData.orderDetails){
-      if(a.insert){
-        const orderDetail:OrderDetail={
-          id:this.model.id,
-          orderId:this.model.code,
-          materialId:a.materialId,
-          quantity:a.quantity,
-          isActive:true,
-        }
-        console.log(this.orderDetailService.createOrderDetail(orderDetail).subscribe(d=>{pipe(map(data=>{return data}))}));
-      }
-    } 
+    this.saveOrderDetail();
   }
 
   selectData(it:ChangeData){
@@ -111,11 +97,10 @@ export class OrderComponent implements OnInit{
   }
   getOrderDetails(){
     this.orderDetailService.getOrderDetails(this.order.orderId).subscribe(data=>{
-      
       for(const key in data){
           this.materialService.getMaterialById(data[key].materialId).subscribe(mat=>{
             const ordDet={
-              id:1,
+              id:data[key].id,
               orderId:this.order.orderId,
               orderDate:new Date(),
               customerId:this.order.customerId,
@@ -138,5 +123,31 @@ export class OrderComponent implements OnInit{
           })
         }
       });
+  }
+
+  saveOrderDetail():void{
+    for(const a of this.changeData.orderDetails){
+      if(a.insert){
+        const orderDetail:OrderDetail={
+          id:a.id,
+          orderId:this.model.code,
+          materialId:a.materialId,
+          quantity:a.quantity,
+          isActive:true,
+        }
+        this.orderDetailService.createOrderDetail(orderDetail).subscribe(d=>{pipe(map(data=>{return data}))});
+      }else if(a.update){
+        const orderDetail:OrderDetail={
+          id:a.id,
+          orderId:this.model.code,
+          materialId:a.materialId,
+          quantity:a.quantity,
+          isActive:true,
+        }
+        this.orderDetailService.updateOrderDetail(a.id,orderDetail).subscribe(data=>{
+          console.log(data);
+        });
+      }
+    } 
   }
 }

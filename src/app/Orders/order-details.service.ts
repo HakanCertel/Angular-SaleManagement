@@ -16,7 +16,7 @@ export class OrderDetailsService {
  
   constructor(private http:HttpClient) { }
  
-  getOrderDetails(orderNo:string):Observable<OrderDetailDTO[]>{
+  getOrderDetails(orderNo?:string):Observable<OrderDetailDTO[]>{
     return this.http.get<OrderDetailDTO[]>(this.url+"/orderDetail.json")
      .pipe(map(data=>{
        const ordDet:OrderDetailDTO[]=[];
@@ -28,6 +28,8 @@ export class OrderDetailsService {
             }else{
               console.log("detail service else")
             }
+          }else{
+            ordDet.push({...data[key],id:key})
           }
          }
          return ordDet;
@@ -35,5 +37,11 @@ export class OrderDetailsService {
   }
   createOrderDetail(orderDetail:OrderDetail):Observable<OrderDetail>{
     return this.http.post<OrderDetail>(this.url+"orderDetail.json",orderDetail);
+  }
+  deleteOrderDetail(id:string){
+    this.http.delete(this.url+"orderDetail/"+id+".json").subscribe(()=>console.log("delete"));
+  }
+  updateOrderDetail(id:string,ordDet:OrderDetail):Observable<OrderDetail>{
+    return this.http.put<OrderDetail>(this.url+"orderDetail/"+id+".json",ordDet);
   }
 }
