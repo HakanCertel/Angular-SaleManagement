@@ -1,5 +1,6 @@
 # Angular-SaleManagement
 Angular/Firebase Application
+<h6>URL: https://ordermanagement-6ac53.web.app/customer-list</h6>
 <p>I developed this application in a few day in order to show my skills I have about Angular.</p>
 <div>During developing , i used Angular.js, Fontawesome, Bootstrap in front-end thecnology,</div>
 <div></div>In database and deploying i used Firebase
